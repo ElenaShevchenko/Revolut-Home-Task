@@ -1,0 +1,11 @@
+.exchange {
+    display: flex;
+  font-size: 24px;
+  color: #fff;
+    &__currency{
+      flex: 50%;
+     }
+    &__input{
+      flex: 50%;
+    }
+}
