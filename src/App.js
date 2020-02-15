@@ -1,38 +1,45 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import './App.scss';
 import Card from "./components/Card";
 import CardHeader from "./components/CardHeader";
+import {AVAILABLE_CURRENCY_LIST} from "./constant";
+import {fetchRates} from "./actions";
+import {bindActionCreators} from "redux";
 
-const defaultCurrencyList = [
-    {
-        id: "usd",
-        name: "USD",
-        link: "#usd",
-    },
-    {
-        id: "gbr",
-        name: "GBR",
-        link: "#gbr",
-    },
-    {
-        id: "eur",
-        name: "EUR",
-        link: "#eur",
+export class App extends Component {
+    componentDidMount() {
+        setInterval(this.getRates(), 10 * 1000);
     }
 
-];
+    getRates = () => {
+        const {getRatesFunc, currencyFrom} = this.props;
+        getRatesFunc(currencyFrom);
+        return this.getRates;
+    };
 
-function App() {
-
-    return (
-        <div className="App">
-            <CardHeader/>
-            <main>
-                <Card currencyList={defaultCurrencyList} cardId = "top-card"/>
-                <Card currencyList={defaultCurrencyList} cardId = "bottom-card"/>
-            </main>
-        </div>
-    );
+    render() {
+        return (
+            <div className="App">
+                <CardHeader/>
+                <main>
+                    <Card currencyList={AVAILABLE_CURRENCY_LIST} cardId = "top-card"/>
+                    <Card currencyList={AVAILABLE_CURRENCY_LIST} cardId = "bottom-card"/>
+                </main>
+            </div>
+        )
+    }
 }
 
-export default App;
+const mapStateToProps = state => ({
+    currencyFrom: state.user.currencyFrom,
+});
+
+const mapDispatchToProps = dispatch => ({
+    getRatesFunc: bindActionCreators(fetchRates, dispatch),
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);
