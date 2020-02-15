@@ -21,16 +21,15 @@ class Exchange extends Component {
       <div className="exchange">
         <section className="exchange__currency">
             <div className="exchange__currency-name">
-                EVR
+                {this.props.currency.name}
             </div>
             <div className="exchange__currency-wallet">
                 You have $55.33
             </div>
         </section>
-        <section className="exchange__input">
-            <div className="exchange__value">
-                50
-            </div>
+        <section className="exchange__action">
+            <input className="exchange__input" type="text"/>
+
             <div className="exchange__course">
                 $1 = h6
             </div>

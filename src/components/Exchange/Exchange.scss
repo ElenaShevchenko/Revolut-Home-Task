@@ -1,11 +1,31 @@
 .exchange {
     display: flex;
-  font-size: 24px;
+    font-size: 0.8rem;
   color: #fff;
+  padding: 0 1.5rem;
     &__currency{
       flex: 50%;
+      text-align: left;
      }
-    &__input{
+  &__currency-name{
+      text-transform: uppercase;
+      font-size: 4rem;
+     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+  }
+    &__action{
       flex: 50%;
+      text-align: right;
     }
+
+  &__input{
+    font-size: 4rem;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    text-align: right;
+
+  }
 }
