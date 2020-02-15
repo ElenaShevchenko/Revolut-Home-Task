@@ -1,0 +1,9 @@
+@import '../../utilities/variables';
+
+.card-header {
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: $main-padding/2 $main-padding;
+  background: #1c56d0;
+}
