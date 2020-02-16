@@ -4,9 +4,10 @@ import './App.scss';
 import Card from "./components/Card";
 import CardHeader from "./components/CardHeader";
 import {AVAILABLE_CURRENCY_LIST} from "./constant";
-import {exchange, fetchRates, setCurrencyFrom, setCurrencyTo, setValueFrom, setValueTo} from "./actions";
+import {exchange, fetchRates, setCurrencyFrom, setCurrencyTo, setValueFrom, setValueTo, cancelExchange} from "./actions";
 import {bindActionCreators} from "redux";
 import {formatInputValueToTwoDigitsNumber} from "./helpers";
+import Wallet from "./components/Wallet";
 
 export class App extends Component {
     componentDidMount() {
@@ -32,6 +33,8 @@ export class App extends Component {
 
     handleExChange = () => this.props.exchangeFunc();
 
+    handelCancel = () => this.props.cancelFunc();
+
     render() {
         const {currencyFrom, valueFrom, currencyTo, valueTo, wallet, rates} = this.props;
         return (
@@ -41,10 +44,15 @@ export class App extends Component {
                     currencyFrom={currencyFrom}
                     rates ={rates}
                     onExchange={this.handleExChange}
+                    onCancel={this.handelCancel}
                 />
+                <Wallet
+                    wallet={wallet}
+                    currencyList = {AVAILABLE_CURRENCY_LIST}/>
+
                 <main>
                     <Card
-                        currencyList={AVAILABLE_CURRENCY_LIST}
+                        currencyList= {AVAILABLE_CURRENCY_LIST}
                         cardId = "top-card"
                         balance={wallet}
                         currency={currencyFrom}
@@ -87,6 +95,7 @@ const mapDispatchToProps = dispatch => ({
     setValueFromFunc: bindActionCreators(setValueFrom, dispatch),
     setCurrencyToFunc: bindActionCreators(setCurrencyTo, dispatch),
     setValueToFunc: bindActionCreators(setValueTo, dispatch),
+    cancelFunc: bindActionCreators(cancelExchange, dispatch)
 });
 
 export default connect(

@@ -2,12 +2,15 @@ import React from 'react';
 import './CardHeader.scss';
 import { getCurrencySymbol} from '../../helpers';
 
-const CardHeader = ({ rates, currencyTo, currencyFrom, onExchange }) => {
+const CardHeader = ({ rates, currencyTo, currencyFrom, onExchange, onCancel }) => {
     let course = `${getCurrencySymbol(currencyFrom)}1 = ${getCurrencySymbol(currencyTo)}${rates[currencyTo]}`;
 
     return(
         <header className="card-header">
-            <button type="button" className="btn">Cancel</button>
+            <button
+                type="button"
+                className="btn"
+                onClick={onCancel}>Cancel</button>
             <div className="card-header_rate">{course}</div>
             <button
                 type="submit"

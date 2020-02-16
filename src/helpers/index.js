@@ -1,4 +1,4 @@
-export const formatToTwoDigitsNumber = (number, currentAmount = 100) => {
+export const formatToTwoDigitsNumber = (number, currentAmount = 10000000) => {
     if( number>currentAmount){
         return currentAmount;
     }

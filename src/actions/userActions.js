@@ -1,6 +1,5 @@
 import * as ActionTypes from './actionTypes';
 import {fetchRates} from "../actions";
-import {AVAILABLE_CURRENCY_LIST} from "../constant";
 
 export const setValueFrom = valueFrom => (dispatch, getState) => {
     return dispatch({
@@ -53,4 +52,10 @@ export const exchange = () => (dispatch, getState) => {
     });
 
     dispatch(setValueFrom(''));
+};
+
+
+export const cancelExchange = () => (dispatch) => {
+    dispatch(setValueFrom(''));
+    dispatch(setValueTo(''));
 };

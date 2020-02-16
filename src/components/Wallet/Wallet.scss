@@ -1,0 +1,15 @@
+.wallet {
+  background: white;
+  color: #1c56d0;
+  padding: 0.5rem 1.5rem;
+
+  &__list {
+    display: flex;
+    margin: 0;
+  }
+  &__item{
+  list-style: none;
+   margin-right: 10px;
+
+}
+}

@@ -1,5 +1,6 @@
 import initialState from './initial.state';
 import * as ActionTypes from '../actions/actionTypes';
+import {formatToTwoDigitsNumber} from "../helpers";
 
 const setValueFrom = (state, action) => {
     const {currencyTo, rates} = state;
@@ -52,10 +53,9 @@ const setCurrencyTo = (state, action) => {
 
 const exchange =  (state, action) => {
     const {valueFrom, valueTo, currencyFrom, currencyTo} = action;
-    console.log(state);
     const wallet = {...state.wallet};
-    wallet[currencyFrom] = wallet[currencyFrom]-valueFrom;
-    wallet[currencyTo] = wallet[currencyTo]+valueTo;
+    wallet[currencyFrom] = formatToTwoDigitsNumber(wallet[currencyFrom]-valueFrom, wallet[currencyFrom]);
+    wallet[currencyTo] = formatToTwoDigitsNumber(wallet[currencyTo]+valueTo, wallet[currencyTo]+valueTo);
     return Object.assign({}, state, {
         wallet,
     });
