@@ -1,12 +1,18 @@
+@import "variables";
 .btn {
   border: none;
-  color: #fff;
+  color: $color-white;
   background: transparent;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: $font;
+  cursor: pointer;
 }
 
 ul {
   padding: 0;
   margin: 0;
+}
+
+h3 {
+  margin: $margin/2 0;
 }

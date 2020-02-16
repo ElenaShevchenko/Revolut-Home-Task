@@ -1,0 +1,17 @@
+@import '../../utilities/variables';
+
+.wallet {
+  background: $color-white;
+  color: $color-blue;
+  padding: $padding-sm $padding;
+
+  &__list {
+    display: flex;
+    margin: 0;
+  }
+
+  &__item {
+    list-style: none;
+    margin-right: $margin;
+  }
+}

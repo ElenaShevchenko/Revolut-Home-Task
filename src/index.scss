@@ -3,21 +3,19 @@
 
 body {
   margin: 0;
-  font-family: "Futura New", Futura, Avenir, sans-serif;
+  font-family: Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #eee;
+  background: $color-gray;
 }
-
 
 html, body {
   height: 100%;
   overflow: hidden;
 }
-
 
 * {
   box-sizing: border-box;
