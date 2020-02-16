@@ -1,11 +1,11 @@
 @import '../../utilities/variables';
 
 .card-header {
-  color: #fff;
+  color: $color-white;
   display: flex;
   justify-content: space-between;
-  padding: $main-padding/2 $main-padding;
-  background: #1c56d0;
+  padding: $padding/2 $padding;
+  background: $color-blue;
 
   &__list {
     list-style: none;

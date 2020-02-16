@@ -26,10 +26,10 @@ const setValueTo = (state, action) => {
 
 const setCurrencyFrom = (state, action) => {
     const {valueFrom, currencyFrom, rates} = state;
+
     const currencyTo = state.currencyTo === currencyFrom ?
         state.currencyFrom :
         state.currencyTo;
-
     const valueTo = valueFrom * rates[currencyTo];
 
     return Object.assign({}, state, {
@@ -51,11 +51,11 @@ const setCurrencyTo = (state, action) => {
     });
 };
 
-const exchange =  (state, action) => {
+const exchange = (state, action) => {
     const {valueFrom, valueTo, currencyFrom, currencyTo} = action;
     const wallet = {...state.wallet};
-    wallet[currencyFrom] = formatToTwoDigitsNumber(wallet[currencyFrom]-valueFrom, wallet[currencyFrom]);
-    wallet[currencyTo] = formatToTwoDigitsNumber(wallet[currencyTo]+valueTo, wallet[currencyTo]+valueTo);
+    wallet[currencyFrom] = formatToTwoDigitsNumber(wallet[currencyFrom] - valueFrom, wallet[currencyFrom]);
+    wallet[currencyTo] = formatToTwoDigitsNumber(wallet[currencyTo] + valueTo, wallet[currencyTo] + valueTo);
     return Object.assign({}, state, {
         wallet,
     });

@@ -2,7 +2,6 @@ import * as ActionTypes from './actionTypes';
 import axios from 'axios';
 import {AVAILABLE_CURRENCY_LIST, BASE_URL, APP_ID} from "../constant";
 
-
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.timeout = 100000;
 const base = 'USD'; //Base can not be dynamic because ""Changing the API `base` currency is available for Developer, Enterprise and Unlimited plan clients. Please upgrade, or contact support@openexchangerates.org with any questions."
@@ -11,7 +10,7 @@ export const fetchRatesFromApi = (currencies) =>
     axios.get(`${BASE_URL}${APP_ID}&base=${base}&symbols=${currencies}`)
         .then(res => res.data);
 
-export const setFetchedRates= rates => ({
+export const setFetchedRates = rates => ({
     type: ActionTypes.FETCH_CURRENCY_RATES_SUCCESS,
     rates
 });
@@ -36,14 +35,13 @@ export const fetchRates = (currencyFrom) => dispatch => {
         .then(rates => {
             dispatch(setFetchRatesLoading(false));
             let formattedRates = {...rates.rates};
-            if(currencyFrom !== base){
-                const currencies = AVAILABLE_CURRENCY_LIST.filter((currency)=>currency !== currencyFrom);
+            if (currencyFrom !== base) {
+                const currencies = AVAILABLE_CURRENCY_LIST.filter((currency) => currency !== currencyFrom);
                 currencies.forEach((item) => {
-                    if(item === base){
-                        formattedRates[item] = +(1/formattedRates[currencyFrom]).toFixed(2);
-                    }
-                    else {
-                        formattedRates[item] = +(formattedRates[item]/formattedRates[currencyFrom]).toFixed(2);
+                    if (item === base) {
+                        formattedRates[item] = +(1 / formattedRates[currencyFrom]).toFixed(2);
+                    } else {
+                        formattedRates[item] = +(formattedRates[item] / formattedRates[currencyFrom]).toFixed(2);
                     }
                 });
                 formattedRates[currencyFrom] = 1.00;

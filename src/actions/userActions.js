@@ -28,8 +28,7 @@ export const setCurrencyFrom = currencyFrom => (dispatch) => {
 };
 
 export const setCurrencyTo = currencyTo => (dispatch, getState) => {
-    const currencyFrom =  getState().user.currencyFrom;
-
+    const currencyFrom = getState().user.currencyFrom;
     return dispatch(fetchRates(currencyFrom))
         .then(() => {
             return dispatch({
@@ -42,7 +41,6 @@ export const setCurrencyTo = currencyTo => (dispatch, getState) => {
 
 export const exchange = () => (dispatch, getState) => {
     const state = getState().user;
-
     dispatch({
         type: ActionTypes.EXCHANGE_CURRENCY,
         currencyFrom: state.currencyFrom,
@@ -50,7 +48,6 @@ export const exchange = () => (dispatch, getState) => {
         valueTo: state.valueTo,
         valueFrom: state.valueFrom,
     });
-
     dispatch(setValueFrom(''));
 };
 

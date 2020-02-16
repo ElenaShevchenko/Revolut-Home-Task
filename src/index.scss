@@ -9,15 +9,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #eee;
+  background: $color-gray;
 }
-
 
 html, body {
   height: 100%;
   overflow: hidden;
 }
-
 
 * {
   box-sizing: border-box;

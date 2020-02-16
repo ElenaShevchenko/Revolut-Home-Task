@@ -1,21 +1,23 @@
 import React from 'react';
 import './CardHeader.scss';
-import { getCurrencySymbol} from '../../helpers';
+import {getCurrencySymbol} from '../../helpers';
 
-const CardHeader = ({ rates, currencyTo, currencyFrom, onExchange, onCancel }) => {
+const CardHeader = ({rates, currencyTo, currencyFrom, onExchange, onCancel}) => {
     let course = `${getCurrencySymbol(currencyFrom)}1 = ${getCurrencySymbol(currencyTo)}${rates[currencyTo]}`;
 
-    return(
+    return (
         <header className="card-header">
             <button
                 type="button"
                 className="btn"
-                onClick={onCancel}>Cancel</button>
+                onClick={onCancel}>Cancel
+            </button>
             <div className="card-header_rate">{course}</div>
             <button
                 type="submit"
                 className="btn"
-                onClick={onExchange}>Exchange</button>
+                onClick={onExchange}>Exchange
+            </button>
         </header>
     )
 };

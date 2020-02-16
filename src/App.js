@@ -4,7 +4,15 @@ import './App.scss';
 import Card from "./components/Card";
 import CardHeader from "./components/CardHeader";
 import {AVAILABLE_CURRENCY_LIST} from "./constant";
-import {exchange, fetchRates, setCurrencyFrom, setCurrencyTo, setValueFrom, setValueTo, cancelExchange} from "./actions";
+import {
+    exchange,
+    fetchRates,
+    setCurrencyFrom,
+    setCurrencyTo,
+    setValueFrom,
+    setValueTo,
+    cancelExchange
+} from "./actions";
 import {bindActionCreators} from "redux";
 import {formatInputValueToTwoDigitsNumber} from "./helpers";
 import Wallet from "./components/Wallet";
@@ -42,37 +50,37 @@ export class App extends Component {
                 <CardHeader
                     currencyTo={currencyTo}
                     currencyFrom={currencyFrom}
-                    rates ={rates}
+                    rates={rates}
                     onExchange={this.handleExChange}
                     onCancel={this.handelCancel}
                 />
                 <Wallet
                     wallet={wallet}
-                    currencyList = {AVAILABLE_CURRENCY_LIST}/>
+                    currencyList={AVAILABLE_CURRENCY_LIST}/>
 
                 <main>
                     <Card
-                        currencyList= {AVAILABLE_CURRENCY_LIST}
-                        cardId = "top-card"
+                        currencyList={AVAILABLE_CURRENCY_LIST}
+                        cardId="top-card"
                         balance={wallet}
                         currency={currencyFrom}
-                        currencyFrom = {currencyFrom}
+                        currencyFrom={currencyFrom}
                         value={valueFrom}
                         rates={rates}
                         handleCurrencyChange={this.handleFromCurrencyChange}
                         handleValueChange={this.handleFromValueChange}
-                       />
+                    />
                     <Card
                         currencyList={AVAILABLE_CURRENCY_LIST}
-                        cardId = "bottom-card"
+                        cardId="bottom-card"
                         balance={wallet}
                         currency={currencyTo}
-                        currencyFrom = {currencyFrom}
+                        currencyFrom={currencyFrom}
                         value={valueTo}
                         rates={rates}
                         handleCurrencyChange={this.handleToCurrencyChange}
                         handleValueChange={this.handleToValueChange}
-                        />
+                    />
                 </main>
             </div>
         )
