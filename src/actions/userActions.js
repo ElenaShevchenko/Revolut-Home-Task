@@ -17,13 +17,12 @@ export const setValueTo = valueTo => (dispatch, getState) => {
     });
 };
 
-export const setCurrencyFrom = currencyFrom => (dispatch, getState) => {
+export const setCurrencyFrom = currencyFrom => (dispatch) => {
     return dispatch(fetchRates(currencyFrom))
         .then(() => {
             return dispatch({
                 type: ActionTypes.SET_CURRENCY_FROM,
                 currencyFrom,
-                rates: getState().rates,
             });
         });
 };
@@ -39,7 +38,6 @@ export const setCurrencyTo = currencyTo => (dispatch, getState) => {
                 type: ActionTypes.SET_CURRENCY_TO,
                 currencyFrom,
                 currencyTo,
-                rates: getState().rates,
             });
         });
 };

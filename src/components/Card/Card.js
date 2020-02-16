@@ -1,40 +1,41 @@
 import React, {Component} from 'react';
 import './Card.scss';
-import Exchange from "../Exchange";
+import CurrencyList from "../CurrencyList";
+import { Select, MenuItem } from '@material-ui/core';
+import ExchangeInput from "../ExchangeInput";
+import {getCurrencySymbol} from "../../helpers";
+
 
 class Card extends Component {
-    // constructor(props){
-    // super(props);
-    // this.state = {};
-    // }
-
-    // componentWillMount(){}
-    // componentDidMount(){}
-    // componentWillUnmount(){}
-
-    // componentWillReceiveProps(){}
-    // shouldComponentUpdate(){}
-    // componentWillUpdate(){}
-    // componentDidUpdate(){}
 
     render() {
+        const {currency, handleCurrencyChange, cardId, balance, value, handleValueChange, currencyFrom, rates} = this.props;
         return (
             <section className="card-slider">
-                <ul className="card-slider__slides">
-                    {this.props.currencyList.map((currency) => {
-                            const key = `${currency}${this.props.cardId}`;
-                            return <li key={key} id={key} className="card-slider__item"><Exchange currency={currency}/></li>
-                        })
-                    }
-                </ul>
-                <div className="card-slider__control">
-                    {this.props.currencyList.map((currency) => {
-                        const key = `#${currency}${this.props.cardId}`;
-                        return <a href={key}  key={key} className="card-slider__control-item">{currency}</a>
-                    })
-                    }
+                <div className="exchange">
+                        <Select labelId="label" id="select" value={currency} onChange={handleCurrencyChange}>
+                            {this.props.currencyList.map((currencyItem) => {
+                                const key = `${currencyItem}${cardId}`;
+                                return (
+                                    <MenuItem value = {currencyItem} key={key}><CurrencyList currency={currencyItem}/></MenuItem>
+                                )
+                            })
+                            }
+                        </Select>
+                        <div className="exchange__currency-wallet">
+                            You have {getCurrencySymbol(currency)}{balance[currency]}
+                        </div>
                 </div>
+                <ExchangeInput
+                    value={value}
+                    disabled={false}
+                    onChange={handleValueChange}
+                    cardId={cardId}
+                    currency={currency}
+                    currencyFrom={currencyFrom}
+                    rates ={rates}/>
             </section>
+
         );
     }
 }

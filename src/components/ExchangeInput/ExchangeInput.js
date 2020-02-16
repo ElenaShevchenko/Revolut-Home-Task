@@ -1,27 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './ExchangeInput.scss';
-import {formatToTwoDigitsNumber} from '../../helpers';
+import {formatToTwoDigitsNumber, getCurrencySymbol} from '../../helpers';
 
-const ExchangeInput = ({name, value, onChange, disabled, isValueFrom}) => (
-    <input
-        className="exchange__input"
-        type="text"
-        name={name}
-        placeholder="0"
-        value={value === '' ? '' : (isValueFrom ? `-${formatToTwoDigitsNumber(value)}` : formatToTwoDigitsNumber(value))}
-        onChange={onChange}
-        disabled={disabled}
-        isValueFrom={isValueFrom}
-    />
-);
+const ExchangeInput = ({ value, onChange, disabled, cardId, rates, currency, currencyFrom }) => {
+    const rateForCurrencyFrom = rates && rates.rates ? rates.rates[currencyFrom] : 1 ;
+    let course = cardId === 'bottom-card' ? `${getCurrencySymbol(currency)}1 = ${getCurrencySymbol(currencyFrom)}${rateForCurrencyFrom}` : '';
 
-ExchangeInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.any.isRequired,
-  onChange: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired,
-  isValueFrom: PropTypes.bool.isRequired
+    return(
+    <section className="exchange__action">
+        <input
+            className="exchange__input"
+            type="text"
+            placeholder="0"
+            value={value === '' ? '' : formatToTwoDigitsNumber(value)}
+            onChange={onChange}
+            disabled={disabled}
+        />
+
+        <div className="exchange__course">
+           {course}
+        </div>
+    </section>)
 };
+
+
 
 export default ExchangeInput;

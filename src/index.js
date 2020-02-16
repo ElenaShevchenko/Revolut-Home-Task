@@ -5,7 +5,10 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/config';
+import 'typeface-roboto';
+
 const store = configureStore();
+
 
 serviceWorker.unregister();
 ReactDOM.render(

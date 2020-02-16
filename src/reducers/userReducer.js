@@ -24,8 +24,7 @@ const setValueTo = (state, action) => {
 };
 
 const setCurrencyFrom = (state, action) => {
-    const {valueFrom} = state;
-    const {currencyFrom, rates} = action;
+    const {valueFrom, currencyFrom, rates} = state;
     const currencyTo = state.currencyTo === currencyFrom ?
         state.currencyFrom :
         state.currencyTo;
@@ -40,8 +39,7 @@ const setCurrencyFrom = (state, action) => {
 };
 
 const setCurrencyTo = (state, action) => {
-    const {valueFrom} = state;
-    const {currencyTo, currencyFrom, rates} = action;
+    const {valueFrom, currencyFrom, rates, currencyTo} = state;
     const valueTo = valueFrom * rates.rates[currencyTo];
 
     return Object.assign({}, state, {
@@ -68,17 +66,24 @@ const exchange =  (state, action) => {
 };
 
 export default function userReducer(state = initialState, action) {
+    console.log(state);
     switch (action.type) {
         case ActionTypes.SET_VALUE_TO:
             return setValueTo(state, action);
         case ActionTypes.SET_VALUE_FROM:
             return setValueFrom(state, action);
         case ActionTypes.SET_CURRENCY_FROM:
-            return setCurrencyTo(state, action);
-        case ActionTypes.SET_CURRENCY_TO:
             return setCurrencyFrom(state, action);
+        case ActionTypes.SET_CURRENCY_TO:
+            return setCurrencyTo(state, action);
         case ActionTypes.EXCHANGE_CURRENCY:
             return exchange(state, action);
+        case ActionTypes.FETCH_CURRENCY_RATES_FAILED:
+            return Object.assign({}, state, {errors: action.error});
+        case ActionTypes.FETCH_CURRENCY_RATES_LOADING:
+            return Object.assign({}, state, {loading: action.loading});
+        case ActionTypes.FETCH_CURRENCY_RATES_SUCCESS:
+            return Object.assign({}, state, {rates: action.rates});
         default:
             return state;
     }

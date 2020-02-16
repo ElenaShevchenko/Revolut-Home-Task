@@ -8,7 +8,7 @@ export default {
     valueTo: '',
     wallet: {
         USD: 100.00,
-        GBR: 100.00,
+        GBP: 100.00,
         EUR: 100.00,
     },
     loading: false,
