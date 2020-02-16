@@ -1,30 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './CardHeader.scss';
+import { getCurrencySymbol} from '../../helpers';
 
-class CardHeader extends Component {
-  // constructor(props){
-    // super(props);
-    // this.state = {};
-  // }
+const CardHeader = ({ rates, currencyTo, currencyFrom, onExchange }) => {
+    let course = `${getCurrencySymbol(currencyFrom)}1 = ${getCurrencySymbol(currencyTo)}${rates[currencyTo]}`;
 
-  // componentWillMount(){}
-  // componentDidMount(){}
-  // componentWillUnmount(){}
-
-  // componentWillReceiveProps(){}
-  // shouldComponentUpdate(){}
-  // componentWillUpdate(){}
-  // componentDidUpdate(){}
-
-  render() {
-    return (
+    return(
         <header className="card-header">
-            <button type="reset" className="btn">Cancel</button>
-            <div className="card-header_rate">hdhdhdhhd</div>
-            <button type="submit" className="btn">Exchange</button>
+            <button type="button" className="btn">Cancel</button>
+            <div className="card-header_rate">{course}</div>
+            <button
+                type="submit"
+                className="btn"
+                onClick={onExchange}>Exchange</button>
         </header>
-    );
-  }
-}
-
+    )
+};
 export default CardHeader;

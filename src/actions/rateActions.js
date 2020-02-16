@@ -35,7 +35,20 @@ export const fetchRates = (currencyFrom) => dispatch => {
     return fetchRatesFromApi(currencies)
         .then(rates => {
             dispatch(setFetchRatesLoading(false));
-            dispatch(setFetchedRates(rates));
+            let formattedRates = {...rates.rates};
+            if(currencyFrom !== base){
+                const currencies = AVAILABLE_CURRENCY_LIST.filter((currency)=>currency !== currencyFrom);
+                currencies.forEach((item) => {
+                    if(item === base){
+                        formattedRates[item] = +(1/formattedRates[currencyFrom]).toFixed(2);
+                    }
+                    else {
+                        formattedRates[item] = +(formattedRates[item]/formattedRates[currencyFrom]).toFixed(2);
+                    }
+                });
+                formattedRates[currencyFrom] = 1.00;
+            }
+            dispatch(setFetchedRates(formattedRates));
         })
         .catch(error => {
             dispatch(setFetchRatesLoading(false));

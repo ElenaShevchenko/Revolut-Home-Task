@@ -33,7 +33,8 @@ class Card extends Component {
                     cardId={cardId}
                     currency={currency}
                     currencyFrom={currencyFrom}
-                    rates ={rates}/>
+                    rates ={rates}
+                    currrentAmmount={balance[currency]}/>
             </section>
 
         );

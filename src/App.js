@@ -14,34 +14,43 @@ export class App extends Component {
     }
 
     getRates = () => {
-        const {getRatesFunc, currencyFrom} = this.props;
+        const {getRatesFunc, currencyFrom,} = this.props;
         getRatesFunc(currencyFrom);
         return this.getRates;
     };
 
-    handleFromValueChange = event => this.props.setValueFromFunc(formatInputValueToTwoDigitsNumber(event.target.value));
+    handleFromValueChange = event => this.props.setValueFromFunc(
+        formatInputValueToTwoDigitsNumber(event.target.value, this.props.wallet[this.props.currencyFrom]));
 
     handleToValueChange = event => this.props.setValueToFunc(
-        formatInputValueToTwoDigitsNumber(event.target.value)
+        formatInputValueToTwoDigitsNumber(event.target.value, this.props.wallet[this.props.currencyTo])
     );
 
     handleFromCurrencyChange = (event, value) => this.props.setCurrencyFromFunc(value.props.value);
 
     handleToCurrencyChange = (event, value) => this.props.setCurrencyToFunc(value.props.value);
 
+    handleExChange = () => this.props.exchangeFunc();
+
     render() {
         const {currencyFrom, valueFrom, currencyTo, valueTo, wallet, rates} = this.props;
-        console.log(rates, 8888888888);
         return (
             <div className="App">
-                <CardHeader/>
+                <CardHeader
+                    currencyTo={currencyTo}
+                    currencyFrom={currencyFrom}
+                    rates ={rates}
+                    onExchange={this.handleExChange}
+                />
                 <main>
                     <Card
                         currencyList={AVAILABLE_CURRENCY_LIST}
                         cardId = "top-card"
                         balance={wallet}
                         currency={currencyFrom}
+                        currencyFrom = {currencyFrom}
                         value={valueFrom}
+                        rates={rates}
                         handleCurrencyChange={this.handleFromCurrencyChange}
                         handleValueChange={this.handleFromValueChange}
                        />

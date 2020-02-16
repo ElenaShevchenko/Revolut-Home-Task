@@ -10,5 +10,4 @@ const configureStore = initialState => createStore(
         applyMiddleware(thunk, reduxImmutableStateInvariant()),
     )
 );
-console.log(configureStore);
 export default configureStore;

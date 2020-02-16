@@ -1,11 +1,12 @@
 import * as ActionTypes from './actionTypes';
 import {fetchRates} from "../actions";
+import {AVAILABLE_CURRENCY_LIST} from "../constant";
 
 export const setValueFrom = valueFrom => (dispatch, getState) => {
     return dispatch({
         type: ActionTypes.SET_VALUE_FROM,
         valueFrom,
-        rates: getState().rates,
+        rates: getState().user.rates,
     });
 };
 
@@ -13,7 +14,7 @@ export const setValueTo = valueTo => (dispatch, getState) => {
     return dispatch({
         type: ActionTypes.SET_VALUE_TO,
         valueTo,
-        rates: getState().rates,
+        rates: getState().user.rates,
     });
 };
 
@@ -28,9 +29,7 @@ export const setCurrencyFrom = currencyFrom => (dispatch) => {
 };
 
 export const setCurrencyTo = currencyTo => (dispatch, getState) => {
-    const currencyFrom =  getState().currencyFrom === currencyTo ?
-        getState().currencyTo :
-        getState().currencyFrom;
+    const currencyFrom =  getState().user.currencyFrom;
 
     return dispatch(fetchRates(currencyFrom))
         .then(() => {
@@ -43,12 +42,14 @@ export const setCurrencyTo = currencyTo => (dispatch, getState) => {
 };
 
 export const exchange = () => (dispatch, getState) => {
-    const state = getState();
+    const state = getState().user;
 
     dispatch({
         type: ActionTypes.EXCHANGE_CURRENCY,
-        active: state.active,
-        rates: state.rates
+        currencyFrom: state.currencyFrom,
+        currencyTo: state.currencyTo,
+        valueTo: state.valueTo,
+        valueFrom: state.valueFrom,
     });
 
     dispatch(setValueFrom(''));
