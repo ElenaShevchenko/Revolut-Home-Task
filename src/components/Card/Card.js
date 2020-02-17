@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './Card.scss';
-import CurrencyList from "../CurrencyList";
+import Currency from "../Currency";
 import {Select, MenuItem} from '@material-ui/core';
 import ExchangeInput from "../ExchangeInput";
 import {getCurrencySymbol} from "../../helpers";
@@ -18,7 +18,7 @@ class Card extends Component {
                         {this.props.currencyList.map((currencyItem) => {
                             const key = `${currencyItem}${cardId}`;
                             return (
-                                <MenuItem value={currencyItem} key={key}><CurrencyList currency={currencyItem}/></MenuItem>
+                                <MenuItem value={currencyItem} key={key}><Currency currency={currencyItem}/></MenuItem>
                             )
                         })
                         }
@@ -29,7 +29,6 @@ class Card extends Component {
                 </div>
                 <ExchangeInput
                     value={value}
-                    disabled={false}
                     onChange={handleValueChange}
                     cardId={cardId}
                     currency={currency}

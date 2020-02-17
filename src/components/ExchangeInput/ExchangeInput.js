@@ -2,7 +2,7 @@ import React from 'react';
 import './ExchangeInput.scss';
 import {formatToTwoDigitsNumber, getCurrencySymbol} from '../../helpers';
 
-const ExchangeInput = ({value, onChange, disabled, cardId, rates, currency, currencyFrom, currentAmount}) => {
+const ExchangeInput = ({value, onChange, cardId, rates, currency, currencyFrom, currentAmount}) => {
     const rate = (1 / rates[currency]).toFixed(2);
     let course = cardId === 'bottom-card' ? `${getCurrencySymbol(currency)}1 = ${getCurrencySymbol(currencyFrom)}${rate}` : '';
 
@@ -13,7 +13,6 @@ const ExchangeInput = ({value, onChange, disabled, cardId, rates, currency, curr
                 type="text"
                 value={value === '' ? '' : formatToTwoDigitsNumber(value, currentAmount)}
                 onChange={onChange}
-                disabled={disabled}
             />
 
             <div className="exchange__course">
