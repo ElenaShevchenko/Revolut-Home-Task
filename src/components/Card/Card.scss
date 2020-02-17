@@ -53,3 +53,10 @@ $border: 3vh;
   padding: 0;
 }
 
+
+.MuiMenuItem-root .exchange__currency-name {
+  color: $color-light-blue !important;
+  &:hover {
+    color: $color-blue !important;
+  }
+}
