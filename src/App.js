@@ -51,6 +51,7 @@ export class App extends Component {
                     currencyTo={currencyTo}
                     currencyFrom={currencyFrom}
                     rates={rates}
+                    valueFrom={valueFrom}
                     onExchange={this.handleExChange}
                     onCancel={this.handelCancel}
                 />

@@ -1,4 +1,5 @@
 @import "variables";
+
 .btn {
   border: none;
   color: $color-white;
@@ -6,6 +7,10 @@
   font-weight: bold;
   font-size: $font;
   cursor: pointer;
+
+  &:disabled {
+    color: $color-light-blue;
+  }
 }
 
 ul {

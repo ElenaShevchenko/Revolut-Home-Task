@@ -40,9 +40,9 @@ const setCurrencyFrom = (state, action) => {
 };
 
 const setCurrencyTo = (state, action) => {
-    const {valueFrom, currencyFrom, rates, currencyTo} = state;
+    const {valueFrom, currencyFrom, rates} = state;
 
-    const valueTo = valueFrom * rates[currencyTo];
+    const valueTo = valueFrom * rates[action.currencyTo];
 
     return Object.assign({}, state, {
         currencyTo: action.currencyTo,

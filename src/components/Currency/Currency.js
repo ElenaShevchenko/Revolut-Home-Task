@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import './CurrencyList.scss';
+import './Currency.scss';
 
-class CurrencyList extends Component {
+class Currency extends Component {
     render() {
         return (
             <section className="exchange__currency">
@@ -9,9 +9,8 @@ class CurrencyList extends Component {
                     {this.props.currency}
                 </div>
             </section>
-
         );
     }
 }
 
-export default CurrencyList;
+export default Currency;
