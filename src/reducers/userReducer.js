@@ -3,23 +3,21 @@ import * as ActionTypes from '../actions/actionTypes';
 import {formatToTwoDigitsNumber} from "../helpers";
 
 const setValueFrom = (state, action) => {
-    const {currencyTo, rates} = state;
-    const {valueFrom} = action;
-    const valueTo = valueFrom * rates[currencyTo];
-
+    const {currencyTo, rates, wallet, currencyFrom} = state;
+    let valueFrom = +action.valueFrom > +wallet[currencyFrom] ? wallet[currencyFrom] : action.valueFrom;
     return Object.assign({}, state, {
-        valueFrom: action.valueFrom,
-        valueTo: valueTo
+        valueFrom: valueFrom,
+        valueTo: valueFrom * rates[currencyTo]
     });
 };
 
 const setValueTo = (state, action) => {
-    const {currencyTo, rates} = state;
-    const {valueTo} = action;
-    const valueFrom = valueTo / rates[currencyTo];
+    const {currencyTo, rates, wallet, currencyFrom} = state;
+    let valueFrom = action.valueTo / rates[currencyTo];
+    valueFrom = +valueFrom > +wallet[currencyFrom] ? wallet[currencyFrom] : valueFrom;
 
     return Object.assign({}, state, {
-        valueTo: action.valueTo,
+        valueTo: valueFrom * rates[currencyTo],
         valueFrom: valueFrom
     });
 };
@@ -54,8 +52,8 @@ const setCurrencyTo = (state, action) => {
 const exchange = (state, action) => {
     const {valueFrom, valueTo, currencyFrom, currencyTo} = action;
     const wallet = {...state.wallet};
-    wallet[currencyFrom] = formatToTwoDigitsNumber(wallet[currencyFrom] - valueFrom, wallet[currencyFrom]);
-    wallet[currencyTo] = formatToTwoDigitsNumber(wallet[currencyTo] + valueTo, wallet[currencyTo] + valueTo);
+    wallet[currencyFrom] = formatToTwoDigitsNumber(wallet[currencyFrom] - valueFrom);
+    wallet[currencyTo] = formatToTwoDigitsNumber(wallet[currencyTo] + valueTo);
     return Object.assign({}, state, {
         wallet,
     });

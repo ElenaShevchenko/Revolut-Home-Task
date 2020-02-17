@@ -1,12 +1,9 @@
-export const formatToTwoDigitsNumber = (number, currentAmount = 10000000) => {
-    if (number > currentAmount) {
-        return currentAmount;
-    }
+export const formatToTwoDigitsNumber = (number) => {
     if (number && number) {
         const decimal = (number.toString().split('.')[1] || []).length;
-        return decimal > 2 ? Number(number).toFixed(2) : number;
+        return decimal > 2 ? Number(number).toFixed(2) : +number;
     } else {
-        return number;
+        return +number;
     }
 };
 
@@ -19,12 +16,11 @@ const removeSecondPeriod = string => {
 };
 
 
-export const formatInputValueToTwoDigitsNumber = (string, currentAmount) => {
-    string = string.replace('-', '');
+export const formatInputValueToTwoDigitsNumber = (string) => {
     let stringMod;
     if (string.includes('.') && string.indexOf('.') > string.length - 1) {
         stringMod = parseFloat(string.replace(/[^\d.]/g, ''));
-        return formatToTwoDigitsNumber(removeSecondPeriod(stringMod), currentAmount);
+        return formatToTwoDigitsNumber(removeSecondPeriod(stringMod));
     } else {
         stringMod = removeSecondPeriod(string.replace(/[^\d.]/g, ''));
         return stringMod;

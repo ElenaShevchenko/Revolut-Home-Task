@@ -22,7 +22,6 @@ describe('ExchangeInput', () => {
         cardId: 'cardId',
         currency: 'USD',
         currencyFrom: 'USD',
-        currentAmount: 100,
         rates: {
             USD: 1,
             EUR: 1.20,

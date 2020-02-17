@@ -10,7 +10,6 @@ class Card extends Component {
 
     render() {
         const {currency, handleCurrencyChange, cardId, balance, value, handleValueChange, currencyFrom, rates} = this.props;
-        const currentAmount = cardId === 'top-card' ? balance[currencyFrom] : balance[currency];
         return (
             <section className="card-slider">
                 <div className="exchange">
@@ -33,8 +32,7 @@ class Card extends Component {
                     cardId={cardId}
                     currency={currency}
                     currencyFrom={currencyFrom}
-                    rates={rates}
-                    currentAmount={currentAmount}/>
+                    rates={rates}/>
             </section>
 
         );

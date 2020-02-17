@@ -29,10 +29,11 @@ export class App extends Component {
     };
 
     handleFromValueChange = event => this.props.setValueFromFunc(
-        formatInputValueToTwoDigitsNumber(event.target.value, this.props.wallet[this.props.currencyFrom]));
+        formatInputValueToTwoDigitsNumber(event.target.value)
+    );
 
     handleToValueChange = event => this.props.setValueToFunc(
-        formatInputValueToTwoDigitsNumber(event.target.value, this.props.wallet[this.props.currencyTo])
+        formatInputValueToTwoDigitsNumber(event.target.value)
     );
 
     handleFromCurrencyChange = (event, value) => this.props.setCurrencyFromFunc(value.props.value);

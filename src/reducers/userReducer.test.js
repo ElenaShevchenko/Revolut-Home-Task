@@ -1,7 +1,7 @@
 import reducer from './userReducer'
 import * as types from '../actions/actionTypes'
 import initialState from './initial.state'
-import {TEST_RATES} from "../constant";
+import {TEST_RATES, TEST_WALLET} from "../constant";
 
 describe('user reducer', () => {
     it('should return initial state', () => {
@@ -10,7 +10,7 @@ describe('user reducer', () => {
 
     it('should handle SET_VALUE_FROM action', () => {
         expect(
-            reducer({currencyTo: 'USD', rates: TEST_RATES},
+            reducer({currencyTo: 'USD', rates: TEST_RATES, wallet: TEST_WALLET, currencyFrom: 'EUR'},
                 {
                     type: types.SET_VALUE_FROM,
                     valueFrom: 10,
@@ -21,12 +21,14 @@ describe('user reducer', () => {
             rates: TEST_RATES,
             valueTo: 10 * TEST_RATES.USD,
             valueFrom: 10,
+            wallet: TEST_WALLET,
+            currencyFrom: 'EUR',
         });
     });
 
     it('should handle SET_VALUE_TO action', () => {
         expect(
-            reducer({currencyTo: 'USD', rates: TEST_RATES},
+            reducer({currencyTo: 'USD', rates: TEST_RATES, wallet: TEST_WALLET, currencyFrom: 'EUR'},
                 {
                     type: types.SET_VALUE_TO,
                     valueTo: 10,
@@ -37,6 +39,8 @@ describe('user reducer', () => {
             rates: TEST_RATES,
             valueTo: 10,
             valueFrom: 10 / TEST_RATES.USD,
+            wallet: TEST_WALLET,
+            currencyFrom: 'EUR',
         });
     });
 
